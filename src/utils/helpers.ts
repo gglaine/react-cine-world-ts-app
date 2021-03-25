@@ -1,0 +1,60 @@
+import { RouteComponentProps } from "react-router-dom";
+import { MovieMatch } from "../types/movies-types";
+import {  OptionsType, SORTS, Sort } from "../types/common-types";
+import { LAYOUTS, Layout } from "../types/layout-types";
+
+const splitSearchString = (search:string):{[key:string]:string} =>
+  search.substring(1).split("&").reduce((acc, s) => {
+    const [key, value] = s.split("=");
+    return key && value
+      ? Object.assign(
+          { [decodeURIComponent(key)]: decodeURIComponent(value) },
+          acc
+        )
+      : acc;
+  }, {});
+
+export const findLayout = (layout:string) => LAYOUTS.find(l => l === layout);
+export const findSort = (sort:string) => SORTS.find(s => s === sort);
+
+export const getOptions = (
+  props:RouteComponentProps<MovieMatch>
+):OptionsType => {
+  const { location } = props;
+  const all = splitSearchString(location.search);
+  return {
+    page: all.page ? parseInt(all.page, 10) : undefined,
+    layout: findLayout(all.layout),
+    sort: findSort(all.sort),
+    genrer: all.genrer ? parseInt(all.genrer, 10) : undefined,
+    language: all.language ? all.language : undefined,
+  }
+}
+
+export const getLayoutIcon = (layout:Layout) => {
+  switch(layout) {
+    case "list": return "fa-th-list";
+    case "posters": return "fa-file-image-o";
+    default: return "";
+  }
+}
+
+export const getLayoutText = (layout:Layout) => {
+  switch(layout) {
+    case "list": return "List";
+    case "posters": return "Posters";
+    default: return "";
+  }
+}
+
+export const getSortText = (sort:Sort) => {
+  switch(sort) {
+    case "popularity.desc": return "Popularity (Descending)";
+    case "popularity.asc": return "Popularity (Ascending)"
+    case "release_date.desc": return "Release Date (Descending)"
+    case "release_date.asc": return "Release Date (Ascending)"
+    case "vote_average.desc": return "Vote Average (Descending)"
+    case "vote_average.asc": return "Vote Average (Ascending)"
+    default: return "";
+  }
+}
