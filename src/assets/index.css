@@ -230,8 +230,8 @@ a:hover {
 
 .left {
   float: left;
-  width: 13%;
-  margin-left: 15px;
+  width: 16%;
+  margin:0px 15px;
   margin-top: 40px;
 }
 .right {
@@ -261,8 +261,8 @@ ul.multi_select.text li {
 }
 
 div.filter_panel {
-  min-width: 260px;
-  width: 260px;
+  min-width: 70%;
+  width: 100%;
   border: 1px solid #a8dadc;
   display: flex;
   flex-wrap: wrap;
@@ -403,8 +403,6 @@ ul.multi_select li.selected {
   font-size: 25px;
   font-weight: bold;
 }
-
-
 
 /* media queries */
 @media only screen and (max-width: 1039px) {

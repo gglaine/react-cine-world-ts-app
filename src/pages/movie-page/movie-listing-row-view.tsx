@@ -3,7 +3,7 @@ import { getImageUrl } from '../../api';
 import { MovieListResult } from '../../types/movies-types';
 import { Layout } from '../../types/layout-types';
 
-import { ImageWithLoading } from 'src/components/image-with-loading';
+import { ImageWithLoading } from '../../components/image-with-loading';
 
 interface ListItemProps {
   item: MovieListResult;
